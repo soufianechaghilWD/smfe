@@ -1,0 +1,78 @@
+.signup{
+    display: block;
+    margin: 0 auto;
+    max-width: 1440px;
+}
+.signup__content{
+    display: flex;
+    margin: 200px 50px 0;
+}
+.signup__right{
+    border: 1px solid black;
+    max-width: 395px;
+}
+.signup__right > img{
+    object-fit: contain;
+    max-width: 50%;
+    display: block;
+    margin: 30px auto 50px;
+}
+.signup__right > div{
+    margin: 0 0 20px 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.signup__right > div > input{
+    margin-right: 50px;
+    padding: 5px 20px;
+    outline-width: 0;
+    border: 1px solid black;
+}
+.signup__right > div > label{
+    margin-left: 5  px;
+    font-weight: 700;
+}
+.signup__right > button{
+    display: block;
+    margin: 50px auto 0;
+    width: 219.25px;
+    height: 42px;
+    background-color: rgba(24, 39, 92, .92);
+    color: white;
+    border: 1px solid rgba(24, 39, 92, .92);
+    border-radius: 7px;
+    cursor: pointer;
+}
+.signup__right > p {
+    text-align: center;
+    margin-top: 75px;
+    font-weight: 600;
+}
+.signup__right > p > span{
+    text-decoration: underline;
+    padding-left: 10px;
+    color: #003959;
+    font-weight: 800;
+    cursor: pointer;
+}
+@media (max-width: 990px){
+    .signup__left > img{
+        display: none;
+    }
+    .signup__content{
+        margin: 100px 20px 0;
+    }
+    .signup__right > div{
+        margin: 0;
+        margin: 0 0 20px;
+    }
+    .signup__right > div > input{
+        margin-right: 20px;
+        padding: 5px 20px;
+        outline-width: 0;
+    }
+    .signup__right > p {
+        margin-bottom: 20px;
+    }
+}
+
