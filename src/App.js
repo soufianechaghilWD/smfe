@@ -2,6 +2,7 @@ import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Landing from './comp/Landing';
 import SignUp from './comp/SignUp';
+import Home from './comp/Home';
 
 
 function App() {
@@ -11,6 +12,9 @@ function App() {
         <Switch>
           <Route path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/home">
+            <Home />
           </Route>
           <Route path="/">
             <Landing />
