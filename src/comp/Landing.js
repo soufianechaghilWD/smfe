@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../styles/Landing.css'
-import Right from '../files/right.png'
+import Right from '../files/Front.png'
 import Logo from '../files/Logo.png'
 import { useHistory }from 'react-router-dom';
 import { auth } from '../firebase';

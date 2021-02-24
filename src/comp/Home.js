@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react'
 import { useStateValue } from "./StateProvider";
 import { useHistory }from 'react-router-dom';
-
+import '../styles/Home.css'
+import Header from './Header';
+import Post from './Post';
+import Sugg from './Sugg';
 
 function Home() {
 
@@ -16,7 +19,17 @@ function Home() {
 
     return (
         <div className="home">
-            <h1>{state?.user?.user?.displayName}</h1>
+            <Header />
+            <div className="home__content">
+                <div className="home__posts">
+                    <Post />
+                    <Post />
+                    <Post />
+                </div>
+                <div className="home__sugg">
+                    <Sugg />
+                </div>
+            </div>
         </div>
     )
 }

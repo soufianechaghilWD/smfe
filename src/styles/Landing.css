@@ -7,6 +7,10 @@
     display: flex;
     margin: 200px 50px 0;
 }
+.landing__left > img{
+    object-fit: contain;
+    width: 100%;
+}
 .landing__right{
     border: 1px solid black;
     max-width: 395px;

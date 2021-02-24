@@ -1,0 +1,88 @@
+.post{
+    padding: 20px ;
+    border: 1px solid rgba(0, 0, 0, .2);
+    margin-bottom: 20px;
+    width: 610px;
+}
+/* Styling the header of the post */
+.post__header{
+    display: flex;
+    margin-bottom: 10px;
+}
+.post__header > h3{
+    display: block;
+    margin: auto 0;
+    padding-left: 8px;
+}
+/* Styling the Post (the image) */
+.post__post{
+    width: 100%;
+}
+.post__post > img{
+    object-fit: contain;
+    min-width: 100%;
+}
+/* Styling the LCS */
+.post__LCS{
+    margin: 10px 0 ;
+}
+.post__LCS > svg{
+    font-size: 30px !important;
+    cursor: pointer;
+}
+.post__LCS > p{
+    font-size: 18px;
+    font-weight: 700;
+}
+.post__LCS > svg:not(:first-child){
+    padding-left: 20px;
+}
+.post__LCS__S{
+    float: right;
+}
+.post__LCS__liked{
+    color: red;
+}
+/* Styling the Bio */
+.post__bio{
+    display: flex;
+    /* justify-content: space-around; */
+}
+.post__poster{
+    padding-right: 20px;
+}
+.post__poster > h3{
+    font-size: 14px;
+}
+.post__bio__bio{
+    display: block;
+    margin: auto 0;
+}
+.post__bio__bio > p{
+    font-size: 12px;
+}
+/* Styling the comment */
+.post__comments > h1{
+    margin: 5px 0 10px ;
+    font-size: 20px;
+}
+.comment{
+    display: flex;
+}
+.comment__commenter{
+    /* display: flex; */
+    padding-right: 10px;
+}
+.comment__commenter > h3{
+    /* display: block;
+    margin: auto 0;
+    padding-left: 6px; */
+    font-size: 14px;
+}
+.comment__com{
+    display: block;
+    margin: auto 0;
+}
+.comment__com > p{
+    font-size: 12px;
+}

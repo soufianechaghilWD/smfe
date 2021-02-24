@@ -1,0 +1,57 @@
+.header{
+    display: flex;
+    background-color: white;
+    z-index: 9999;
+    max-width: 1440px;
+}
+/* This is the part that makes the header sticky  */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+/* ------------ */
+.header > div{
+    flex: 1 1 0px; 
+}
+.header__search{
+    display: block;
+    margin: auto;
+}
+.header__search > div{
+    display: flex;
+    margin: auto;
+    border: 1px solid black;
+    width: fit-content;
+    justify-content: center;
+    width: 65%;
+}
+.header__search > div > input{
+    border: none;
+    outline-width: 0;
+    width: 100%;
+}
+.header__logo > img{
+    object-fit: contain;
+    width: 100%;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+.header__bu{
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+}
+.header__bu__user {
+    display: flex;
+}
+.header__bu__user > h2{
+    padding-right: 15px;
+}
+.header__bu__ic{
+    display: block;
+    margin: auto 0;
+    font-size: 45px !important;
+    cursor: pointer;
+}

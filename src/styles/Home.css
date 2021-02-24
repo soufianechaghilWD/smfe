@@ -1,0 +1,50 @@
+.home {
+    display: block;
+    margin: 0 auto;
+    max-width: 1440px;
+}
+
+.home__content {
+    width: 90%;
+    margin: 30px auto 0;
+}
+.home__content .home__posts {
+    width: 60%;
+    margin: 0 0 40px;
+    float: left;
+}
+  
+.home__sugg {
+    top: 20%;
+    position: fixed;
+    right: 5%;
+    width: 36%;
+    float: right;
+}
+
+@media (min-width: 1500px){
+    .home__sugg {
+        right: 13%; 
+        top: 15%;       
+    }
+}
+@media (min-width: 1800px){
+    .home__sugg {
+        top: 13%;       
+    }
+}
+@media (min-width: 2500px){
+    .home__sugg {
+        top: 10%;       
+    }
+}
+@media (min-width: 3700px){
+    .home__sugg {
+        top: 7%;       
+    }
+}
+@media (min-width: 5000px){
+    .home__sugg {
+        top: 5%;       
+    }
+}

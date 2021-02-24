@@ -3,6 +3,10 @@
     margin: 0 auto;
     max-width: 1440px;
 }
+.signup__left > img{
+    object-fit: contain;
+    width: 100%;
+}
 .signup__content{
     display: flex;
     margin: 200px 50px 0;
@@ -37,7 +41,7 @@
     margin: 50px auto 0;
     width: 219.25px;
     height: 42px;
-    background-color: rgba(24, 39, 92, .92);
+    background-color: rgba(24, 39, 92, 0.922);
     color: white;
     border: 1px solid rgba(24, 39, 92, .92);
     border-radius: 7px;
