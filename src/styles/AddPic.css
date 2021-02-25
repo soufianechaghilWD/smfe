@@ -1,0 +1,38 @@
+#addpic {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 55px;
+    box-sizing: border-box;
+}
+#addpic > h1{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 45px;
+    font-weight: 800;
+}
+#addpic > input{
+    margin: 25px 0 45px;
+}
+#addpic > div {
+    display: flex;
+    margin-bottom: 30px;
+}
+#addpic > div > h3{
+    padding-right: 30px;
+    font-size: 17px;
+    font-weight: 600;
+}
+#addpic > div > textarea{
+    flex: 1;
+}
+#addpic > button{
+    display: block;
+    margin:  auto;
+    width: 150px;
+    background: #18275C;
+    border-radius: 4px;
+    color: white;
+    font-weight: 600;
+    border: 1px solid #18275C;
+    padding: 5px 0 5px;
+}

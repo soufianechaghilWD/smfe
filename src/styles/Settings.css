@@ -1,0 +1,28 @@
+.settings{
+    display: block;
+    margin: 0 auto;
+    max-width: 1440px;
+}
+.settings > h1{
+    text-align: center;
+    font-size: 55px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+.settings__content{
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 1px solid rgba(0, 0, 0, .3);
+}
+.settings__content > h2{
+    padding: 15px 0 15px 20px;
+}
+.settings__content > .settings__part{
+    display: flex;
+    padding: 10px 0 20px 50px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+.settings__content > .settings__part  > input{
+    display: block;
+    margin: auto 20px ;
+}

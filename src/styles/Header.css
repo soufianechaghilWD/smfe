@@ -18,7 +18,7 @@
     display: block;
     margin: auto;
 }
-.header__search > div{
+#header__se{
     display: flex;
     margin: auto;
     border: 1px solid black;
@@ -26,7 +26,7 @@
     justify-content: center;
     width: 65%;
 }
-.header__search > div > input{
+#header__se > input{
     border: none;
     outline-width: 0;
     width: 100%;
@@ -37,6 +37,7 @@
     max-width: 200px;
     display: block;
     margin: 0 auto;
+    cursor: pointer;
 }
 .header__bu{
     display: flex;
@@ -52,6 +53,9 @@
 .header__bu__ic{
     display: block;
     margin: auto 0;
-    font-size: 45px !important;
+    font-size: 35px !important;
     cursor: pointer;
+}
+.header__addPic{
+    background-color: rgba(255, 255, 255, .4);
 }
