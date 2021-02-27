@@ -1,0 +1,14 @@
+.allsugg{
+    display: block;
+    margin: 0 auto;
+    max-width: 1440px;
+}
+.allsugg > h1{
+    text-align: center;
+    padding: 0 0 30px;
+}
+.allsugg__content{
+    max-width: 500px;
+    display: block;
+    margin: 0 auto;
+}

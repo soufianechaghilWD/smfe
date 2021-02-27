@@ -9,6 +9,7 @@
     position: fixed;
     top: 0;
     width: 100%;
+    
 }
 /* ------------ */
 .header > div{
@@ -19,6 +20,7 @@
     margin: auto;
 }
 #header__se{
+    background-color: white;
     display: flex;
     margin: auto;
     border: 1px solid black;

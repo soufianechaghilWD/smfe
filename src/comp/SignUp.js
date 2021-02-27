@@ -5,6 +5,7 @@ import Logo from '../files/Logo.png'
 import { useHistory }from 'react-router-dom';
 import { auth } from '../firebase' 
 import { useStateValue } from "./StateProvider";
+import axios from '../axios'
 
 function SignUp() {
 
@@ -25,7 +26,24 @@ function SignUp() {
                 authUser.user.updateProfile({
                     displayName: username,
                     photoURL: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png'
-                }).then(() => {
+                })
+                .then(() => {
+                    //Save the user on the DB
+                    axios.post('/user', {
+                        _id: authUser.user.uid,
+                        username: username,
+                        email: email,
+                        urlPic: "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
+                        posts: [],
+                        peopleUserFoll: [],
+                        peopleFollUser: [],
+                        private: false,
+                        asking: [],
+                        newLikes: [],
+                        acceptingFrie: []
+                    })
+                })
+                .then(() => {
                     dispatch({
                         type: "SET__USER",
                         user: authUser

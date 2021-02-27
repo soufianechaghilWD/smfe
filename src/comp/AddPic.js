@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import '../styles/AddPic.css'
+import { storage } from '../firebase';
+import axios from '../axios'
+import { useStateValue } from "./StateProvider";
 
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -22,21 +25,45 @@ function AddPic() {
     const classes = useStyles();
     const [file, setFile] = useState(null)
     const [bio, setBio] = useState("")
+    const [ state , dispatch] = useStateValue();
 
-    const publishPost = () => {
+    function handleChange(e) {
+      setFile(e.target.files[0]);
+    }
 
-        //post the pic to the firebase store and post the returned Url on the database
+    function handleUpload(e) {
+      //upload pic to firebase and store in DB
+      e.preventDefault();
+      const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+      uploadTask.on("state_changed", console.log, console.error, () => {
+        storage
+          .ref("images")
+          .child(file.name)
+          .getDownloadURL()
+          .then((url) => {
+            axios.post('/post', {
+              picUrl: url,
+              bio: bio,
+              poster: state?.user?.user?.uid,
+              likes: [],
+              comments: []
+            }).then(() => {
+              setBio('')
+              setFile(null)
+            })
+          });
+      });
     }
 
     return (
         <div id="addpic"  className={classes.paper}>
             <h1>Post a Picture</h1>
-            <input type="file" value={file} onChange={(e) => setFile(e.target.value)} />
+            <input type="file"  onChange={handleChange} />
             <div>
                 <h3>Say something </h3>
                 <textarea rows={6} value={bio} onChange={(e) => setBio(e.target.value)} />
             </div>
-            <button onClick={publishPost} >Publish</button>
+            <button onClick={handleUpload} >Publish</button>
         </div>
     )
 }
