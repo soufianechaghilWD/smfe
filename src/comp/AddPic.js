@@ -26,6 +26,7 @@ function AddPic() {
     const [file, setFile] = useState(null)
     const [bio, setBio] = useState("")
     const [ state , dispatch] = useStateValue();
+    const [done, setDone] = useState(false)
 
     function handleChange(e) {
       setFile(e.target.files[0]);
@@ -44,12 +45,13 @@ function AddPic() {
             axios.post('/post', {
               picUrl: url,
               bio: bio,
-              poster: state?.user?.user?.uid,
+              poster: state?.userDB?._id,
               likes: [],
               comments: []
             }).then(() => {
               setBio('')
               setFile(null)
+              setDone(true)
             })
           });
       });
@@ -64,6 +66,7 @@ function AddPic() {
                 <textarea rows={6} value={bio} onChange={(e) => setBio(e.target.value)} />
             </div>
             <button onClick={handleUpload} >Publish</button>
+            {done && <p style={{color: "green", textAlign: "center", fontWeight: 600, paddingBottom: 10}}>Posted Succefully</p>}
         </div>
     )
 }

@@ -1,7 +1,8 @@
 export const initialState = {
     user: null,
     users: [],
-    sugg: []
+    sugg: [],
+    userDB: null
 };
 const reducer = (state, action) => {
     switch (action.type) {
@@ -9,6 +10,11 @@ const reducer = (state, action) => {
         return {
           ...state,
           user: action.user
+        }
+      case "SET__USERDB":
+        return {
+          ...state,
+          userDB: action.userDB
         }
       case "SET__USERS":
         return {

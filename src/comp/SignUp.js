@@ -24,13 +24,11 @@ function SignUp() {
             if(authUser){
                 //Update the user in firebase && Create a user in the database "then" set the user in the context API and take the user to home Page
                 authUser.user.updateProfile({
-                    displayName: username,
                     photoURL: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png'
                 })
                 .then(() => {
                     //Save the user on the DB
                     axios.post('/user', {
-                        _id: authUser.user.uid,
                         username: username,
                         email: email,
                         urlPic: "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
@@ -41,6 +39,11 @@ function SignUp() {
                         asking: [],
                         newLikes: [],
                         acceptingFrie: []
+                    })
+                    .then((res) => {
+                        authUser.user.updateProfile({
+                            displayName: res.data._id
+                        })
                     })
                 })
                 .then(() => {

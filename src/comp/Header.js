@@ -106,7 +106,7 @@ function Header() {
             </div>         
             <div className="header__bu">
                 <div className="header__bu__user">
-                    <h2>{state?.user?.user?.displayName.charAt(0).toUpperCase() + state?.user?.user?.displayName.slice(1)}</h2>
+                    <h2>{state?.userDB?.username?.charAt(0)?.toUpperCase() + state?.userDB?.username?.slice(1)}</h2>
                     <Avatar alt={state?.user?.user?.displayName} src={state?.user?.user?.photoURL} />
                 </div>
                 <AddBoxIcon className="header__bu__ic" onClick={() => setOpen(true)} />

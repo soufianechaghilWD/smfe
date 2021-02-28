@@ -26,7 +26,7 @@ function Sugg() {
     const returnSugg = (sugg) => {
         return <div className="sugg__sugg">
                 <Avatar className={classes.small} alt="Poster" src={sugg?.urlPic} />
-                <h5>{sugg?.username?.charAt(0).toUpperCase() + sugg?.username?.slice(1)}<br /><span>Suggestion for you</span></h5>
+                <h5>{sugg?.username?.charAt(0)?.toUpperCase() + sugg?.username?.slice(1)}<br /><span>Suggestion for you</span></h5>
                 <p>Follow</p>
         </div>
     }
@@ -48,7 +48,7 @@ function Sugg() {
         <div className="sugg">
             <div className="sugg__header">
                 <Avatar className={classes.moy} alt="Poster" src={state?.user?.user?.photoURL} />
-                <h3>{state?.user?.user?.displayName.charAt(0).toUpperCase() + state?.user?.user?.displayName.slice(1)}</h3>
+                <h3>{state?.userDB?.username?.charAt(0)?.toUpperCase() + state?.userDB?.username?.slice(1)}</h3>
                 <p onClick={logout}>Logout</p>
             </div>
             <div className="sugg__all">

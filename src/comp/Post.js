@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function Post() {
+function Post({post}) {
 
     const [like, setLike] = useState(false)
     const [save, setSave] = useState(false)
@@ -34,32 +34,32 @@ function Post() {
             return str.slice(0, 57) + "... "
         }else return str
     }
-    const [shownbio, setShwonBio] = useState(rightSize(bio))
+    const [shownbio, stShwonBio] = useState(rightSize(post?.bio))
     const [plus, setPlus] = useState(false)
-    
+    console.log(post?.bio)
 
     return (
         <div className="post">
             <div className="post__header">
-                <Avatar className={classes.small} alt="Poster" src="https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png" />
-                <h3>Poster</h3>
+                <Avatar className={classes.small} alt="Poster" src={post?.poster?.urlPic} />
+                <h3>{post?.poster?.username?.charAt(0)?.toUpperCase() + post?.poster?.username?.slice(1)}</h3>
             </div>
             <div className="post__post">
-                <img alt="post" src={S1}/>
+                <img alt="post" src={post?.picUrl}/>
             </div>
             <div className="post__LCS">
                 {like !== true ? <FavoriteBorderIcon onClick={() => setLike(!like)}/> : <FavoriteRoundedIcon className="post__LCS__liked" onClick={() => setLike(!like)}/> }
                 <CommentIcon />
                 <ShareIcon />
                 {save !== true ? <BookmarkBorderIcon onClick={() => setSave(!save)} className="post__LCS__S"/> : <BookmarkIcon onClick={() => setSave(!save)} className="post__LCS__S"/>}
-                <p>15 Likes</p>
+                <p>{post?.likes?.length} Likes</p>
             </div>
             <div className="post__bio">
                 <div className="post__poster">
-                    <h3>Poster</h3>
+                    <h3>{post?.poster?.username?.charAt(0)?.toUpperCase() + post?.poster?.username?.slice(1)}</h3>
                 </div>
                 <div className="post__bio__bio">
-                    <p>{shownbio} {(bio.length > 60 && plus === false) && <p style={{float: "right", cursor: "pointer", color: "gray", fontWeight: 700}} onClick={() => {setShwonBio(bio); setPlus(true)}}>plus</p>}</p>
+                    <p>{shownbio} {(post?.bio?.length > 60 && plus === false) && <p style={{float: "right", cursor: "pointer", color: "gray", fontWeight: 700}} onClick={() => {stShwonBio(post?.bio); setPlus(true)}}>plus</p>}</p>
                 </div>
 
             </div>
