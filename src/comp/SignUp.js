@@ -15,54 +15,67 @@ function SignUp() {
     const [password, setPassword] = useState('')
     const [ state , dispatch] = useStateValue();
 
-
     const signup = () => {
 
-        //Authentification using firebase
-        auth.createUserWithEmailAndPassword(email, password)
-        .then(authUser => {
-            if(authUser){
-                //Update the user in firebase && Create a user in the database "then" set the user in the context API and take the user to home Page
-                authUser.user.updateProfile({
-                    photoURL: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png'
+        //Sign up the user on firebase and update it . Then Save the user on DB 
+
+        const promise1 = new Promise((resolve, reject) => {
+            resolve(auth.createUserWithEmailAndPassword(email, password))
+        })
+        promise1.then((authUser) => {
+            console.log('user has been created on firebase', authUser)
+
+            const promise2 = new Promise((resolve, reject) => {
+                resolve(axios.post('/user', {
+                    username: username,
+                    email: email,
+                    urlPic: "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
+                    posts: [],
+                    peopleUserFoll: [],
+                    peopleFollUser: [],
+                    private: false,
+                    asking: [],
+                    newLikes: [],
+                    acceptingFrie: []
+                }))
+            })
+            promise2.then((res) => {
+                console.log("user has been created on DB", res.data)
+                const promise3 = new Promise((resolve, reject) => {
+                    resolve(authUser.user.updateProfile({
+                        displayName: res.data._id,
+                        photoURL: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png'
+                    }))
                 })
-                .then(() => {
-                    //Save the user on the DB
-                    axios.post('/user', {
-                        username: username,
-                        email: email,
-                        urlPic: "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
-                        posts: [],
-                        peopleUserFoll: [],
-                        peopleFollUser: [],
-                        private: false,
-                        asking: [],
-                        newLikes: [],
-                        acceptingFrie: []
+                promise3.then(() => {
+                    console.log('the user on firebase is updated')
+                    const promise4 = new Promise((resolve, reject) => {
+                        resolve(
+                            dispatch({
+                            type: "SET__USERDB",
+                            userDB: res.data
+                        }))
                     })
-                    .then((res) => {
-                        authUser.user.updateProfile({
-                            displayName: res.data._id
+                    promise4.then(() => {
+                        console.log('the userDB in state is dispatched')
+                        const promise5 = new Promise((resolve, reject) => {
+                            resolve(
+                                dispatch({
+                                    type: "SET__USER",
+                                    user: authUser
+                                }) 
+                            )
+                        })
+                        promise5.then(() => {
+                            console.log('the user in state is dispatched')
+                            history.push('/home')
                         })
                     })
                 })
-                .then(() => {
-                    dispatch({
-                        type: "SET__USER",
-                        user: authUser
-                    }) 
-                }) 
-                .then(() => {
-                    history.push('/home') 
-                })
-            }
+
+            })
         })
-
-        setEmail('')
-        setUsername('')
-        setPassword('')
     }
-
     return (
         <div className="signup">
             <div className="signup__content">

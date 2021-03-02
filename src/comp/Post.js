@@ -10,6 +10,8 @@ import Comment from './Comment'
 import { makeStyles } from '@material-ui/core/styles';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
+import axios from '../axios'
+import { useStateValue } from "./StateProvider";
 
 const useStyles = makeStyles((theme) => ({
     small: {
@@ -24,11 +26,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Post({post}) {
 
-    const [like, setLike] = useState(false)
     const [save, setSave] = useState(false)
+    const [comm, setComm] = useState('')
     const classes = useStyles();
+    const [ state , dispatch] = useStateValue();
+    const [like, setLike] = useState(post?.likes?.some(like => like._id === state?.userDB?._id))
 
-    const bio = "Poster said that && he thinks it’s so smart Poster said that && he thinks it’s so smart"
+
     const rightSize = (str) => {
         if(str.length > 60){
             return str.slice(0, 57) + "... "
@@ -36,7 +40,24 @@ function Post({post}) {
     }
     const [shownbio, stShwonBio] = useState(rightSize(post?.bio))
     const [plus, setPlus] = useState(false)
-    console.log(post?.bio)
+
+    const addComment = () => {
+        axios.put(`/comment/add/${post?._id}`, {
+            comment: comm,
+            commenter: state?.userDB?._id 
+        })
+        .then(() => {
+            setComm('')
+        })
+    }
+
+    const addLike = () => {
+        axios.put(`/post/addlike/${post._id}`, {
+            liker: state?.userDB?._id
+        })
+        .then(() => setLike(true))
+    }
+
 
     return (
         <div className="post">
@@ -48,7 +69,7 @@ function Post({post}) {
                 <img alt="post" src={post?.picUrl}/>
             </div>
             <div className="post__LCS">
-                {like !== true ? <FavoriteBorderIcon onClick={() => setLike(!like)}/> : <FavoriteRoundedIcon className="post__LCS__liked" onClick={() => setLike(!like)}/> }
+                {like !== true ? <FavoriteBorderIcon onClick={addLike}/> : <FavoriteRoundedIcon className="post__LCS__liked"/> }
                 <CommentIcon />
                 <ShareIcon />
                 {save !== true ? <BookmarkBorderIcon onClick={() => setSave(!save)} className="post__LCS__S"/> : <BookmarkIcon onClick={() => setSave(!save)} className="post__LCS__S"/>}
@@ -65,7 +86,14 @@ function Post({post}) {
             </div>
             <div className="post__comments">
                 <h1>Comments</h1>
-                <Comment />
+                {post?.comments?.slice(0, 3)?.map(comment => <Comment comment={comment}/>)}
+                {/* <Comment /> */}
+                {/* Add a comment section */}
+                <div className="post__add__comment">
+                    <Avatar className={classes.small} alt="Poster" src={post?.poster?.urlPic} />
+                    <input type="text" value={comm} onChange={(e) => setComm(e.target.value)} placeholder="Add a comment..."/>
+                    <button onClick={addComment} disabled={!comm} >Pulish</button>
+                </div>
             </div>
         </div>
     )

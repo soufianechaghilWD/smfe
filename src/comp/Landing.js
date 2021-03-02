@@ -5,6 +5,7 @@ import Logo from '../files/Logo.png'
 import { useHistory }from 'react-router-dom';
 import { auth } from '../firebase';
 import { useStateValue } from "./StateProvider";
+import axios from '../axios'
 
 function Landing() {
 
@@ -23,13 +24,27 @@ function Landing() {
                 dispatch({
                     type: "SET__USER",
                     user: authUser
+                }) 
+
+                console.log("firebase auth has been done")
+                const promise1 = new Promise((resolve, reject) => {
+                    resolve(axios.get(`/user/one/${authUser.user.displayName}`))
+                })
+                promise1.then((res) => {
+                    const promise2 = new Promise((resolve, reject) => {
+                        resolve(dispatch({
+                            type: "SET__USERDB",
+                            userDB: res.data[0]
+                        }))
+                    })
+                    promise2.then(() => {
+                        history.push('/home')
+                    })
                 })
             }
         })
-        .then(() => {
-            history.push('/home')
-        })
     }
+
 
     return (
         <div className="landing">

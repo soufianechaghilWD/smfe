@@ -1,26 +1,25 @@
 import React, { useState } from 'react'
 
 
-function Comment() {
+function Comment({comment}) {
 
 
-    const comment = "Poster said that && he thinks it’s so smart Poster said that && he thinks it’s so smart"
 
     const rightSize = (str) => {
         if(str.length > 60){
             return str.slice(0, 57) + "..."
         }else return str
     }
-    const [showComment, setShwonComment] = useState(rightSize(comment))
+    const [showComment, setShwonComment] = useState(rightSize(comment?.comment))
     const [plus, setPlus] = useState(false)
 
     return (
         <div className="comment">
             <div className="comment__commenter">
-                <h3>Commenter</h3>
+                <h3>{comment?.commenter?.username?.charAt(0)?.toUpperCase() + comment?.commenter?.username?.slice(1)}</h3>
             </div>
             <div className="comment__com">
-            <p>{showComment} {(comment.length > 60 && plus === false) && <p style={{float: "right", cursor: "pointer", color: "gray", fontWeight: 700}} onClick={() => {setShwonComment(comment); setPlus(true)}}>plus</p>}</p>
+            <p>{showComment} {(comment?.comment?.length > 60 && plus === false) && <p style={{float: "right", cursor: "pointer", color: "gray", fontWeight: 700}} onClick={() => {setShwonComment(comment?.comment); setPlus(true)}}>plus</p>}</p>
             </div>
         </div>
     )

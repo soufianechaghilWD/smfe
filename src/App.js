@@ -8,6 +8,7 @@ import Settings from './comp/Settings';
 import AllSugg from './comp/AllSugg';
 import axios from './axios'
 import { useStateValue } from "./comp/StateProvider";
+import User from './comp/User';
 
 function App() {
 
@@ -28,6 +29,9 @@ function App() {
     <Router>
       <div className="app">
         <Switch>
+          <Route path="/profile">
+            <User />
+          </Route>
           <Route path="/allsugg">
             <AllSugg />
           </Route>

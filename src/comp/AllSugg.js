@@ -1,39 +1,27 @@
-import React from 'react'
-import Avatar from '@material-ui/core/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect } from 'react'
 import Header from './Header';
 import "../styles/AllSugg.css"
+import { useStateValue } from "./StateProvider";
+import OneSu from './OneSu';
+import { useHistory }from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-    moy: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
-    },
-    small: {
-        width: theme.spacing(4),
-        height: theme.spacing(4),
-      }
-  }));
 
 function AllSugg() {
 
-    const classes = useStyles();
-
-
-    const returnSugg = () => {
-        return <div className="sugg__sugg">
-                <Avatar className={classes.small} alt="Poster" src="https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png" />
-                <h5>Suugestion1<br /><span>Suggestion for you</span></h5>
-                <p>Follow</p>
-        </div>
-    }
+    const [ state , dispatch] = useStateValue();
+    const history = useHistory();
+    useEffect(() => {
+        if(state.user === undefined || state.user === null){
+            history.push('/')
+        }
+    }, [])
 
     return (
         <div className="allsugg">
             <Header />
             <h1>All Suggestions</h1>
             <div className="allsugg__content">
-                {returnSugg()}
+                {state?.sugg?.map(one => <OneSu key={one._id} sugg={one}/>)}
             </div>
         </div>
     )

@@ -84,6 +84,8 @@ function Header() {
         };
       }, []);
     /*------------------------------------*/ 
+
+
     return (
         <div className="header" id="myHeader"> 
             <div className="header__logo" onClick={() => history.push('/home')}>

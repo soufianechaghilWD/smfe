@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/Sugg.css'
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import { useStateValue } from "./StateProvider";
 import { useHistory }from 'react-router-dom';
 import { auth } from '../firebase';
+import axios from '../axios'
+import OneSu from './OneSu';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,13 +26,7 @@ function Sugg() {
     const [ state , dispatch] = useStateValue();
     const history = useHistory();
 
-    const returnSugg = (sugg) => {
-        return <div className="sugg__sugg">
-                <Avatar className={classes.small} alt="Poster" src={sugg?.urlPic} />
-                <h5>{sugg?.username?.charAt(0)?.toUpperCase() + sugg?.username?.slice(1)}<br /><span>Suggestion for you</span></h5>
-                <p>Follow</p>
-        </div>
-    }
+
     const logout = () => {
         auth.signOut()
         .then(() => {
@@ -55,7 +52,7 @@ function Sugg() {
                 <h4>Suggestions for you</h4>
                 <p onClick={() => history.push('/allsugg')}>See All</p>
             </div>
-            {state?.sugg?.slice(0, 3)?.map(one => returnSugg(one))}
+            {state?.sugg?.slice(0, 3)?.map(one => <OneSu key={one._id} sugg={one}/>)}
         </div>
     )
 }

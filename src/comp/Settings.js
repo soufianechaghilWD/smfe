@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../styles/Settings.css'
 import Header from './Header'
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import { useStateValue } from "./StateProvider";
+import { useHistory }from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     small: {
@@ -20,7 +21,12 @@ function Settings() {
 
     const classes = useStyles();
     const [ state , dispatch] = useStateValue();
-
+    const history = useHistory();
+    useEffect(() => {
+        if(state.user === undefined || state.user === null){
+            history.push('/')
+        }
+    }, [])
 
     return (
         <div className="settings">
