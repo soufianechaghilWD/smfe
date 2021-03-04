@@ -1,0 +1,36 @@
+.profile{
+    max-width: 1440px;
+    display: block;
+    margin: 0 auto;
+}
+.profile__header{
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+.profile__header__info{
+    padding-left: 50px;
+}
+.profile__header__info__row{
+    display: flex;
+}
+.profile__header__info__row > *{
+    display: block;
+    margin: auto 0;
+    padding: 10px 15px;
+    font-weight: 400;
+    font-size: 17px;
+}
+.profile__header__info__row > h3{
+    font-weight: 700;
+    font-size: 24px;
+}
+.profile__ic{
+    font-size: 30px;
+}
+.profile__header__info__row > button{
+    padding: 10px;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: 3px;
+}

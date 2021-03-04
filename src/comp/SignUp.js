@@ -23,7 +23,6 @@ function SignUp() {
             resolve(auth.createUserWithEmailAndPassword(email, password))
         })
         promise1.then((authUser) => {
-            console.log('user has been created on firebase', authUser)
 
             const promise2 = new Promise((resolve, reject) => {
                 resolve(axios.post('/user', {
@@ -40,7 +39,6 @@ function SignUp() {
                 }))
             })
             promise2.then((res) => {
-                console.log("user has been created on DB", res.data)
                 const promise3 = new Promise((resolve, reject) => {
                     resolve(authUser.user.updateProfile({
                         displayName: res.data._id,
@@ -48,7 +46,6 @@ function SignUp() {
                     }))
                 })
                 promise3.then(() => {
-                    console.log('the user on firebase is updated')
                     const promise4 = new Promise((resolve, reject) => {
                         resolve(
                             dispatch({
@@ -57,7 +54,6 @@ function SignUp() {
                         }))
                     })
                     promise4.then(() => {
-                        console.log('the userDB in state is dispatched')
                         const promise5 = new Promise((resolve, reject) => {
                             resolve(
                                 dispatch({
@@ -67,7 +63,6 @@ function SignUp() {
                             )
                         })
                         promise5.then(() => {
-                            console.log('the user in state is dispatched')
                             history.push('/home')
                         })
                     })

@@ -24,8 +24,24 @@ function OneSu({sugg}) {
         axios.put(`/user/${wantedId}`, {
             asker: state?.userDB?._id
         })
-        .then(() => {
-            setFollowed(true)
+        .then((res) => {
+            const promise = new Promise((reso, reje) => {
+                reso(dispatch({
+                    type: "SET__USERDB",
+                    userDB: res.data
+                }))
+            })
+            promise.then(() => {
+                dispatch({
+                    type: "SET__USER",
+                    user: res.data
+                })
+                dispatch({
+                    type: "SET__SUGG",
+                    sugg: state?.sugg?.filter(one => one._id !== wantedId)
+                })
+                setFollowed(true)
+            }) 
         })
     }
     return (

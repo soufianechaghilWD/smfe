@@ -19,7 +19,7 @@ function Home() {
         }else{
             dispatch({
                 type: "SET__SUGG",
-                sugg: state?.users?.sort((a, b) => b.peopleFollUser.length - a.peopleFollUser.length)?.filter(it => it._id !== state?.userDB?._id).filter(one => one.peopleFollUser.map(item => item._id).includes(state?.userDB?._id) === false).filter(use => use.private === false).slice(0, 100)
+                sugg: state?.users?.sort((a, b) => b.peopleFollUser.length - a.peopleFollUser.length)?.filter(it => it._id !== state?.userDB?._id).filter(one => state?.userDB?.peopleUserFoll?.includes(one._id) === false).filter(one => one.peopleFollUser.map(item => item._id).includes(state?.userDB?._id) === false).filter(use => use.private === false).slice(0, 100)
             })
             if(state?.userDB?.peopleUserFoll?.length <= 1){
                 history.push('/allsugg')
@@ -34,7 +34,6 @@ function Home() {
         }
     }, [])
 
-    console.log('Sugg', state?.sugg?.filter(one => one.peopleFollUser.includes(state?.userDB?._id) === false).filter(use => use.private === false))
     return (
         <div className="home">
             <Header />

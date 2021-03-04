@@ -26,7 +26,6 @@ function Landing() {
                     user: authUser
                 }) 
 
-                console.log("firebase auth has been done")
                 const promise1 = new Promise((resolve, reject) => {
                     resolve(axios.get(`/user/one/${authUser.user.displayName}`))
                 })

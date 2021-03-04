@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import '../styles/Post.css'
 import Avatar from '@material-ui/core/Avatar';
-import S1 from '../files/s1.jpg'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import CommentIcon from '@material-ui/icons/Comment';
 import ShareIcon from '@material-ui/icons/Share';
@@ -26,11 +25,12 @@ const useStyles = makeStyles((theme) => ({
 
 function Post({post}) {
 
+    const [thepost, setThePost] = useState(post)
     const [save, setSave] = useState(false)
     const [comm, setComm] = useState('')
     const classes = useStyles();
     const [ state , dispatch] = useStateValue();
-    const [like, setLike] = useState(post?.likes?.some(like => like._id === state?.userDB?._id))
+    const [like, setLike] = useState(thepost?.likes?.some(like => like._id === state?.userDB?._id))
 
 
     const rightSize = (str) => {
@@ -38,59 +38,63 @@ function Post({post}) {
             return str.slice(0, 57) + "... "
         }else return str
     }
-    const [shownbio, stShwonBio] = useState(rightSize(post?.bio))
+    const [shownbio, stShwonBio] = useState(rightSize(thepost?.bio))
     const [plus, setPlus] = useState(false)
 
     const addComment = () => {
-        axios.put(`/comment/add/${post?._id}`, {
+        axios.put(`/comment/add/${thepost?._id}`, {
             comment: comm,
             commenter: state?.userDB?._id 
         })
-        .then(() => {
+        .then((resu) => {
             setComm('')
+            setThePost(resu.data[0])
         })
     }
 
     const addLike = () => {
-        axios.put(`/post/addlike/${post._id}`, {
+        axios.put(`/post/addlike/${thepost._id}`, {
             liker: state?.userDB?._id
         })
-        .then(() => setLike(true))
+        .then((resu) => {
+            setLike(true)
+            setThePost(resu.data[0])
+        })
     }
 
 
     return (
         <div className="post">
             <div className="post__header">
-                <Avatar className={classes.small} alt="Poster" src={post?.poster?.urlPic} />
-                <h3>{post?.poster?.username?.charAt(0)?.toUpperCase() + post?.poster?.username?.slice(1)}</h3>
+                <Avatar className={classes.small} alt="Poster" src={thepost?.poster?.urlPic} />
+                <h3>{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
             </div>
             <div className="post__post">
-                <img alt="post" src={post?.picUrl}/>
+                <img alt="post" src={thepost?.picUrl}/>
             </div>
             <div className="post__LCS">
                 {like !== true ? <FavoriteBorderIcon onClick={addLike}/> : <FavoriteRoundedIcon className="post__LCS__liked"/> }
                 <CommentIcon />
                 <ShareIcon />
                 {save !== true ? <BookmarkBorderIcon onClick={() => setSave(!save)} className="post__LCS__S"/> : <BookmarkIcon onClick={() => setSave(!save)} className="post__LCS__S"/>}
-                <p>{post?.likes?.length} Likes</p>
+                <p>{thepost?.likes?.length} Likes</p>
             </div>
             <div className="post__bio">
                 <div className="post__poster">
-                    <h3>{post?.poster?.username?.charAt(0)?.toUpperCase() + post?.poster?.username?.slice(1)}</h3>
+                    <h3>{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
                 </div>
                 <div className="post__bio__bio">
-                    <p>{shownbio} {(post?.bio?.length > 60 && plus === false) && <p style={{float: "right", cursor: "pointer", color: "gray", fontWeight: 700}} onClick={() => {stShwonBio(post?.bio); setPlus(true)}}>plus</p>}</p>
+                    <p>{shownbio} {(thepost?.bio?.length > 60 && plus === false) && <p style={{float: "right", cursor: "pointer", color: "gray", fontWeight: 700}} onClick={() => {stShwonBio(thepost?.bio); setPlus(true)}}>plus</p>}</p>
                 </div>
 
             </div>
             <div className="post__comments">
                 <h1>Comments</h1>
-                {post?.comments?.slice(0, 3)?.map(comment => <Comment comment={comment}/>)}
+                {thepost?.comments?.slice(0, 3)?.map(comment => <Comment comment={comment}/>)}
                 {/* <Comment /> */}
                 {/* Add a comment section */}
                 <div className="post__add__comment">
-                    <Avatar className={classes.small} alt="Poster" src={post?.poster?.urlPic} />
+                    <Avatar className={classes.small} alt="Poster" src={thepost?.poster?.urlPic} />
                     <input type="text" value={comm} onChange={(e) => setComm(e.target.value)} placeholder="Add a comment..."/>
                     <button onClick={addComment} disabled={!comm} >Pulish</button>
                 </div>
