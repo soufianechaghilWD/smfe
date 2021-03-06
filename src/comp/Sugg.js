@@ -39,13 +39,15 @@ function Sugg() {
             history.push('/')
         })
     }
-
+    const profile = (profileId) => {
+        history.push('/profile', {profileId: profileId})
+    }
 
     return (
         <div className="sugg">
             <div className="sugg__header">
-                <Avatar className={classes.moy} alt="Poster" src={state?.user?.user?.photoURL} />
-                <h3>{state?.userDB?.username?.charAt(0)?.toUpperCase() + state?.userDB?.username?.slice(1)}</h3>
+                <Avatar style={{cursor: "pointer"}} className={classes.moy} alt="Poster" src={state?.user?.user?.photoURL}  onClick={() => profile(state?.userDB?._id)}/>
+                <h3 onClick={() => profile(state?.userDB?._id)}>{state?.userDB?.username?.charAt(0)?.toUpperCase() + state?.userDB?.username?.slice(1)}</h3>
                 <p onClick={logout}>Logout</p>
             </div>
             <div className="sugg__all">

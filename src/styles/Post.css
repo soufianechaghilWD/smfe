@@ -3,6 +3,11 @@
     border: 1px solid rgba(0, 0, 0, .2);
     margin-bottom: 20px;
     width: 560px;
+
+}
+.test{
+    width: 200px;
+    background-color: red;
 }
 /* Styling the header of the post */
 .post__header{
@@ -17,10 +22,22 @@
 /* Styling the Post (the image) */
 .post__post{
     width: 100%;
+    min-height: 550px;
+    background-color: black;
+    position: relative;
 }
-.post__post > img{
+.post__post  > img{
     object-fit: contain;
     min-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;  
 }
 /* Styling the LCS */
 .post__LCS{
@@ -33,6 +50,7 @@
 .post__LCS > p{
     font-size: 18px;
     font-weight: 700;
+    cursor: pointer;
 }
 .post__LCS > svg:not(:first-child){
     padding-left: 20px;
@@ -46,7 +64,6 @@
 /* Styling the Bio */
 .post__bio{
     display: flex;
-    /* justify-content: space-around; */
 }
 .post__poster{
     padding-right: 20px;
@@ -57,9 +74,13 @@
 .post__bio__bio{
     display: block;
     margin: auto 0;
+    word-wrap: break-word;
+    flex: 1;
+    width: 100%;
 }
 .post__bio__bio > p{
     font-size: 12px;
+    width: 90%;
 }
 /* Styling the comment */
 .post__comments > h1{
@@ -82,8 +103,11 @@
 .comment__com{
     display: block;
     margin: auto 0;
+    word-wrap: break-word;
+    width: 100%;
 }
 .comment__com > p{
+    width: 90%;
     font-size: 12px;
 }
 /* styling the adding comment part */
@@ -103,4 +127,69 @@
     font-weight: 600;
     cursor: pointer;
     border: none;
+}
+.post__comments > p {
+    padding-bottom: 10px;
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.post__post__modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal__likes{
+    display: flex;
+    flex-direction: column;
+}
+.likers__header{
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+.likers__header > h2{
+    flex: 1;
+    text-align: center;
+    font-size: 18px;
+    display: block;
+    margin: 0 auto;
+}
+.likers__header > svg{
+    display: block;
+    font-size: 35px;
+    margin: auto 0 auto auto;
+}
+.modal__likes__likers{
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+}
+.modal__likes__likers > div{
+    display: flex;
+    padding: 5px 15px;
+}
+.modal__likes__likers > div > h3{
+    display: block;
+    margin: auto 0;
+    font-weight: 500;
+    padding-left: 8px;
+}
+.modal__likes__likers > div > button{
+    display: block;
+    margin: auto 0 auto auto;
+    color: white;
+    background-color: #0095f6;
+    border: 1px solid #0095f6;
+    font-size: 17px;
+    border-radius: 5px;
+    font-weight: 600;
+    padding: 7px;
+}
+.modal__likes__likers > div > .ifFollowed{
+    background-color: white;
+    border: 1px solid lightgray;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
 }

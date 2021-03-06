@@ -1,0 +1,10 @@
+.postProfile{
+    margin-bottom: 30px;
+    padding: 0 5px;
+    position: relative;
+}
+.postProfile > img{
+    /* object-fit: contain; */
+    width: 100%;
+    height: 100%;
+}

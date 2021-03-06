@@ -1,0 +1,87 @@
+.allcom{
+    display: flex;
+}
+.allcom > img{
+    flex: 1;
+    max-width: 65%;
+    height: 1;
+}
+.post__info{
+    flex: 1;
+    max-width: 35%;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+.post__info > h2{
+    padding: 10px 0 0;
+    font-weight: 19px;
+    font-weight: 500;
+}
+.post__info__header{
+    display: flex;
+    width: 100%;
+    padding: 0 0 15px ;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+.post__info__header > h3{
+    display: block;
+    margin: auto 0;
+    padding: 0 10px;
+}
+.post__info__header > p{
+    display: block;
+    margin: auto 0;
+    font-weight: 400;
+}
+.post__info__header > svg{
+    display: block;
+    margin: auto 0 auto auto;
+    cursor: pointer;
+}
+.post__all__poster{
+    display: flex;
+    padding-top: 15px;
+}
+.post__all__poster > h3{
+    display: block;
+    margin: auto 0;
+    padding: 0 12px;
+}
+.post__all__poster > p{
+    display: block;
+    margin: auto 0;
+}
+.post__allcom{
+    flex: 1;
+    height: 100%;
+    overflow-y: scroll;
+    padding-top: 10px;
+}
+.post__allcom::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+.post__all__comment{
+    display: flex;
+    padding-bottom: 15px;
+}
+.post__all__comment > p{
+    display: block;
+    margin: auto 0;
+    padding-left: 7px;
+}
+.post__all__comment > p > span{
+    font-weight: 700;
+    padding-right: 7px;
+}
+.allcom__info{
+    padding: 10px 0;
+}
+.allcom__info > svg:not(:last-child){
+    padding: 0 10px ;
+}
+.allcom__info > p {
+    cursor: pointer;
+}

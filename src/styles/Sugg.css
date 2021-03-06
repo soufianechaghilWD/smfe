@@ -10,6 +10,7 @@
     margin: auto 0;
     padding-left: 10px;
     font-size: 24px;
+    cursor: pointer;
 }
 .sugg__header > p {
     display: block;

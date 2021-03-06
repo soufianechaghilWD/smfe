@@ -85,6 +85,9 @@ function Header() {
       }, []);
     /*------------------------------------*/ 
 
+    const profile = (profileId) => {
+      history.push('/profile', {profileId: profileId})
+    }
 
     return (
         <div className="header" id="myHeader"> 
@@ -107,7 +110,7 @@ function Header() {
                 </div>  
             </div>         
             <div className="header__bu">
-                <div className="header__bu__user">
+                <div className="header__bu__user" onClick={() => profile(state?.userDB?._id)}>
                     <h2>{state?.userDB?.username?.charAt(0)?.toUpperCase() + state?.userDB?.username?.slice(1)}</h2>
                     <Avatar alt={state?.user?.user?.displayName} src={state?.user?.user?.photoURL} />
                 </div>

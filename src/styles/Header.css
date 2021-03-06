@@ -48,6 +48,7 @@
 }
 .header__bu__user {
     display: flex;
+    cursor: pointer;
 }
 .header__bu__user > h2{
     padding-right: 15px;
