@@ -15,6 +15,7 @@ function AllSugg() {
             history.push('/')
         }
     }, [])
+    console.log("those are sugg", state?.sugg)
 
     return (
         <div className="allsugg">

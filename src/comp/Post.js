@@ -15,6 +15,7 @@ import Modal from '@material-ui/core/Modal';
 import Allcomments from './Allcomments';
 import CloseIcon from '@material-ui/icons/Close';
 import OneLiker from './OneLiker';
+import { useHistory }from 'react-router-dom';
 
 
     const useStyles = makeStyles((theme) => ({
@@ -63,6 +64,7 @@ function Post({post}) {
     const [like, setLike] = useState(thepost?.likes?.some(like => like._id === state?.userDB?._id))
     const [open, setOpen] = useState(false)
     const [openMo, setopenMo] = useState(false)
+    const history = useHistory();
 
     const rightSize = (str) => {
         if(str.length > 60){
@@ -104,8 +106,8 @@ function Post({post}) {
     return (
         <div className="post">
             <div className="post__header">
-                <Avatar className={classes.small} alt="Poster" src={thepost?.poster?.urlPic} />
-                <h3>{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
+                <Avatar  style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: thepost?.poster?._id})} className={classes.small} alt="Poster" src={thepost?.poster?.urlPic} />
+                <h3 style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: thepost?.poster?._id})} >{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
             </div>
             <div className="post__post">
                 <img alt="post" src={thepost?.picUrl}/>
@@ -119,7 +121,7 @@ function Post({post}) {
             </div>
             <div className="post__bio">
                 <div className="post__poster">
-                    <h3>{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
+                    <h3 style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: thepost?.poster?._id})}>{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
                 </div>
                 <div className="post__bio__bio">
                     <p>{shownbio} {(thepost?.bio?.length > 60 && plus === false) && <p style={{float: "right", cursor: "pointer", color: "gray", fontWeight: 700}} onClick={() => {stShwonBio(thepost?.bio); setPlus(true)}}>plus</p>}</p>

@@ -43,3 +43,14 @@
 .profile__posts>* {
     flex: 0 0 32.3333%;
 }
+.profile__header__info__row__followed{
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 4px;
+}
+.profile__header__info__row__follow{
+    color: white;
+    background-color: #0095f6;
+    border: 1px solid #0095f6;
+    border-radius: 4px;
+    cursor: pointer;
+}

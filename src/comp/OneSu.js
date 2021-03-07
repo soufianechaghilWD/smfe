@@ -3,6 +3,7 @@ import { useStateValue } from "./StateProvider";
 import axios from '../axios'
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import { useHistory }from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     moy: {
@@ -19,6 +20,7 @@ function OneSu({sugg}) {
     const classes = useStyles();
     const [ state , dispatch] = useStateValue();
     const [followed, setFollowed] = useState(false)
+    const history = useHistory();
 
     const followUser = (wantedId) => {
         axios.put(`/user/${wantedId}`, {
@@ -46,9 +48,12 @@ function OneSu({sugg}) {
     }
     return (
         <div className="sugg__sugg">
-                <Avatar className={classes.small} alt="Poster" src={sugg?.urlPic} />
-                <h5>{sugg?.username?.charAt(0)?.toUpperCase() + sugg?.username?.slice(1)}<br /><span>Suggestion for you</span></h5>
+                <Avatar style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: sugg?._id})} className={classes.small} alt="Poster" src={sugg?.urlPic} />
+                <h5 style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: sugg?._id})}>{sugg?.username?.charAt(0)?.toUpperCase() + sugg?.username?.slice(1)}<br /><span>Suggestion for you</span></h5>
                 {
+                    sugg?.asking?.includes(state?.userDB?._id) === true ?
+                    <p>Asked</p>
+                    :
                     followed === false ?
                     <p onClick={() => followUser(sugg._id)}>Follow</p>
                     :

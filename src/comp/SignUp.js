@@ -63,7 +63,20 @@ function SignUp() {
                             )
                         })
                         promise5.then(() => {
-                            history.push('/home')
+                            const promise6 = new Promise((reso, reje) => {
+                                reso(axios.get(`/user/sugg/${res.data._id}`))
+                            })
+                            promise6.then((resssu) => {
+                                const promise7 = new Promise((reso, reje) => {
+                                    reso(dispatch({
+                                        type: "SET__SUGG",
+                                        sugg: resssu.data
+                                    }))
+                                })
+                                promise7.then(() => {
+                                    history.push('/home')
+                                })
+                            })
                         })
                     })
                 })

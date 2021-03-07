@@ -57,7 +57,8 @@ function Header() {
     const [openNo, setOpenNo] = useState(false);
     const classes = useStyles();
     const [openSe, setOpenSe] = useState(false)
-
+    const [sear, setSear] = useState("")
+    const [noti, setNoti] = useState(state?.userDB?.asking.map(x => {return {data: x, type: "asking"}}).concat(state?.userDB?.peopleFollUser?.map(y => {return {data: y, type: "following"}})))
     /* This is the part that makes the header sticky  */
 
     const fixedText = "I am fixed :)";
@@ -89,6 +90,16 @@ function Header() {
       history.push('/profile', {profileId: profileId})
     }
 
+    const getDataAccToInp = (users, inp) => {
+      return users.filter(ele => {
+        if(inp.length <= ele.username.length) {
+            let tmp = ele.username.split('').slice(0, inp.length).join('')
+            if(tmp === inp) return ele
+        }
+      })
+    }
+
+
     return (
         <div className="header" id="myHeader"> 
             <div className="header__logo" onClick={() => history.push('/home')}>
@@ -98,11 +109,14 @@ function Header() {
                 <div className="header__search__con">
                     <ClickAwayListener onClickAway={() => setOpenSe(false)}>
                       <div id="header__se" className={classes.root1}>
-                        <input type="text" placeholder="Search" onClick={() => setOpenSe(true)}/>
+                        <input type="text" value={sear} onChange={e => setSear(e.target.value)} placeholder="Search" onClick={() => setOpenSe(true)}/>
                         <SearchIcon />
                         {openSe ? (
                           <div className={classes.dropdown1}>
-                            <Notifications  />
+                            {getDataAccToInp(state?.users, sear)?.map(user => <div onClick={() => { history.push("/profile", {profileId: user._id}); setOpenSe(false); setSear('')}}  className="header__search__inside">
+                              <Avatar alt="" src={user?.picUrl} />
+                              <h1>{user?.username}</h1>
+                            </div>)}
                           </div>
                         ) : null}
                       </div>
@@ -112,7 +126,7 @@ function Header() {
             <div className="header__bu">
                 <div className="header__bu__user" onClick={() => profile(state?.userDB?._id)}>
                     <h2>{state?.userDB?.username?.charAt(0)?.toUpperCase() + state?.userDB?.username?.slice(1)}</h2>
-                    <Avatar alt={state?.user?.user?.displayName} src={state?.user?.user?.photoURL} />
+                    <Avatar alt={state?.user?.user?.displayName} src={state?.userDB?.urlPic} />
                 </div>
                 <AddBoxIcon className="header__bu__ic" onClick={() => setOpen(true)} />
                 <ClickAwayListener onClickAway={() => setOpenNo(false)}>
@@ -120,19 +134,7 @@ function Header() {
                     <NotificationsIcon className="header__bu__ic" onClick={() => setOpenNo(!openNo)}/>
                     {openNo ? (
                       <div className={classes.dropdown}>
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
-                        <Notifications  />
+                        {noti.map(one => <Notifications not={one}/>)}
                       </div>
                     ) : null}
                   </div>

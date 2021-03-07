@@ -14,6 +14,7 @@ import BookmarkIcon from '@material-ui/icons/Bookmark';
 import CloseIcon from '@material-ui/icons/Close';
 import OneLiker from './OneLiker';
 import Modal from '@material-ui/core/Modal';
+import { useHistory }from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     small: {
@@ -48,6 +49,7 @@ function Allcomments({className, post}) {
     const [like, setLike] = useState(thepost?.likes?.some(like => like._id === state?.userDB?._id))
     const [save, setSave] = useState(false)
     const [openMo, setopenMo] = useState(false)
+    const history = useHistory();
 
 
     const addComment = () => {
@@ -73,8 +75,8 @@ function Allcomments({className, post}) {
 
     const returnComment = (comment) => {
         return <div className="post__all__comment">
-                    <Avatar className={classes.small} alt="Poster" src={comment?.commenter?.urlPic} />
-                    <p><span>{comment?.commenter?.username?.charAt(0)?.toUpperCase() + comment?.commenter?.username?.slice(1)}</span> {comment?.comment}</p>
+                    <Avatar style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: comment?.commenter?._id})} className={classes.small} alt="Poster" src={comment?.commenter?.urlPic} />
+                    <p><span style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: comment?.commenter?._id})}>{comment?.commenter?.username?.charAt(0)?.toUpperCase() + comment?.commenter?.username?.slice(1)}</span> {comment?.comment}</p>
                 </div>
     }
 
@@ -89,14 +91,14 @@ function Allcomments({className, post}) {
             <img src={thepost?.picUrl} />
             <div className="post__info">
                 <div className="post__info__header">
-                    <Avatar className={classes.small} alt="Poster" src={thepost?.poster?.urlPic} />
-                    <h3>{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
+                    <Avatar  style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: thepost?.poster?._id})} className={classes.small} alt="Poster" src={thepost?.poster?.urlPic} />
+                    <h3 style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: thepost?.poster?._id})} >{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
                     <p>Following</p>
                     <MoreHorizIcon />
                 </div>
                 <div className="post__all__poster">
-                    <Avatar className={classes.small} alt="Poster" src={thepost?.poster?.urlPic} />
-                    <h3>{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
+                    <Avatar style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: thepost?.poster?._id})} className={classes.small} alt="Poster" src={thepost?.poster?.urlPic} />
+                    <h3 style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: thepost?.poster?._id})}>{thepost?.poster?.username?.charAt(0)?.toUpperCase() + thepost?.poster?.username?.slice(1)}</h3>
                     <p>{thepost?.bio}</p>
                 </div>
                 <h2>Comments</h2>
@@ -108,7 +110,7 @@ function Allcomments({className, post}) {
                     <CommentIcon />
                     <ShareIcon />
                     {save !== true ? <BookmarkBorderIcon onClick={() => setSave(!save)} className="post__LCS__S"/> : <BookmarkIcon onClick={() => setSave(!save)} className="post__LCS__S"/>}
-                    <p onClick={getLikers}>{thepost?.likes?.length} Likes</p>
+                    <p onClick={getLikers} style={{textDecoration: "underline"}}>{thepost?.likes?.length} Likes</p>
                 </div>
                 <div className="post__add__comment">
                     <Avatar className={classes.small} alt="Poster" src={state?.userDB?.urlPic} />

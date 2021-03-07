@@ -37,7 +37,20 @@ function Landing() {
                         }))
                     })
                     promise2.then(() => {
-                        history.push('/home')
+                        const promise3 = new Promise((rese, reje) => {
+                            rese(axios.get(`/user/sugg/${res.data[0]._id}`))
+                        })
+                        promise3.then((ress) => {
+                            const promise4 = new Promise((rese, reje) => {
+                                rese(dispatch({
+                                    type: "SET__SUGG",
+                                    sugg: ress.data
+                                }))
+                            }) 
+                            promise4.then(() => {
+                                history.push('/home')
+                            })
+                        })
                     })
                 })
             }

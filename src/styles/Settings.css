@@ -26,3 +26,17 @@
     display: block;
     margin: auto 20px ;
 }
+.settings > button{
+    display: block;
+    margin: 20px auto;
+    font-size: 19px;
+    padding: 5px 19px;
+    color: white;
+    background-color: #0095f6;
+    border: 1px solid #0095f6;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.settings > button:focus{
+    outline-width: 0;
+}

@@ -17,10 +17,6 @@ function Home() {
         if(state.user === undefined || state.user === null){
             history.push('/')
         }else{
-            dispatch({
-                type: "SET__SUGG",
-                sugg: state?.users?.sort((a, b) => b.peopleFollUser.length - a.peopleFollUser.length)?.filter(it => it._id !== state?.userDB?._id).filter(one => state?.userDB?.peopleUserFoll?.includes(one._id) === false).filter(one => one.peopleFollUser.map(item => item._id).includes(state?.userDB?._id) === false).filter(use => use.private === false).slice(0, 100)
-            })
             if(state?.userDB?.peopleUserFoll?.length <= 1){
                 history.push('/allsugg')
             }
@@ -29,10 +25,20 @@ function Home() {
             })
             promise.then((res) => {
                 setPosts(res.data)
+                const getSugg = new Promise((rese, reje) =>{
+                    rese(axios.get(`/user/sugg/${state?.userDB?._id}`))
+                })
+                getSugg.then((resu) => {
+                    dispatch({
+                        type: "SET__SUGG",
+                        sugg: resu.data
+                    })
+                })
             })
 
         }
     }, [])
+
 
     return (
         <div className="home">
