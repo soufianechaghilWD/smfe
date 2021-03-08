@@ -31,7 +31,7 @@ function Notifications({not}) {
           const promise = new Promise((reso, reje) => {
               reso(dispatch({
                   type: "SET__USERDB",
-                  userDB: res.data
+                  userDB: res.data[0]
               }))
           })
           promise.then(() => {

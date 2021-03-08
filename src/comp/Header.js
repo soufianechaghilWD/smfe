@@ -58,7 +58,7 @@ function Header() {
     const classes = useStyles();
     const [openSe, setOpenSe] = useState(false)
     const [sear, setSear] = useState("")
-    const [noti, setNoti] = useState(state?.userDB?.asking.map(x => {return {data: x, type: "asking"}}).concat(state?.userDB?.peopleFollUser?.map(y => {return {data: y, type: "following"}})))
+    const [noti, setNoti] = useState(state?.userDB?.asking?.map(x => {return {data: x, type: "asking"}}).concat(state?.userDB?.peopleFollUser?.map(y => {return {data: y, type: "following"}})))
     /* This is the part that makes the header sticky  */
 
     const fixedText = "I am fixed :)";
@@ -98,8 +98,6 @@ function Header() {
         }
       })
     }
-
-
     return (
         <div className="header" id="myHeader"> 
             <div className="header__logo" onClick={() => history.push('/home')}>
@@ -114,7 +112,7 @@ function Header() {
                         {openSe ? (
                           <div className={classes.dropdown1}>
                             {getDataAccToInp(state?.users, sear)?.map(user => <div onClick={() => { history.push("/profile", {profileId: user._id}); setOpenSe(false); setSear('')}}  className="header__search__inside">
-                              <Avatar alt="" src={user?.picUrl} />
+                              <Avatar alt="" src={user?.urlPic} />
                               <h1>{user?.username}</h1>
                             </div>)}
                           </div>

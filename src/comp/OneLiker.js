@@ -21,7 +21,8 @@ function OneLiker({one}) {
 
     const classes = useStyles();
     const [ state , dispatch] = useStateValue();
-    const [followed, setFollowed] = useState(state?.userDB?.peopleUserFoll?.includes(one?._id))
+    const [followed, setFollowed] = useState(state?.userDB?.peopleUserFoll?.map(x => x?._id)?.includes(one?._id))
+    const [asked, setAsked] = useState(one?.asking?.includes(state?.userDB?._id))
     const history = useHistory();
 
     const followUser = (wantedId) => {
@@ -32,7 +33,7 @@ function OneLiker({one}) {
             const promise = new Promise((reso, reje) => {
                 reso(dispatch({
                     type: "SET__USERDB",
-                    userDB: res.data
+                    userDB: res.data[0]
                 }))
             })
             promise.then(() => {
@@ -54,7 +55,7 @@ function OneLiker({one}) {
         <div>
             <Avatar style={{cursor: "pointer"}} className={classes.small} alt="Poster" src={one?.urlPic}  onClick={() => history.push('/profile', {profileId: one?._id})}/>
             <h3 style={{cursor: "pointer"}} onClick={() => history.push('/profile', {profileId: one?._id})}>{one?.username?.charAt(0)?.toUpperCase() + one?.username?.slice(1)}</h3>
-            <button onClick={() => followUser(one._id)} disabled={followed} className={followed && "ifFollowed"}> {followed === true ? "Following" : "Follow"} </button>
+            <button onClick={() => followUser(one._id)} disabled={followed || asked} className={(followed || asked ) && "ifFollowed"}> {asked === true ? "Asked" : followed === true ? "Following" : "Follow"} </button>
         </div>
     )
 }
